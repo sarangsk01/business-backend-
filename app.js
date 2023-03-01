@@ -10,12 +10,14 @@ var usersRouter = require('./routes/users');
 
 mongoose.set('strictQuery', false);
 mongoose.connect(
-  'mongodb://127.0.0.1:27017/',
+  'mongodb://127.0.0.1:27017/business',
   { useNewUrlParser: true, useUnifiedTopology: true },
   (err) => {
     console.log(err ? err : 'Connected to database');
   }
 );
+
+var app = express();
 
 // exports.connection = mysql.createConnection({
 //   host: 'localhost',
@@ -30,8 +32,6 @@ mongoose.connect(
 //     console.log('Connected');
 //   });
 // };
-
-var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
