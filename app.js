@@ -8,8 +8,8 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
-const DB =
-  'mongodb+srv://kulkarnisarang01:7776021397@cluster0.dj4jshn.mongodb.net/mernbusiness?retryWrites=true&w=majority';
+const DB = process.env.MONGO_UI;
+
 mongoose.set('strictQuery', false);
 mongoose
   .connect(DB, {
