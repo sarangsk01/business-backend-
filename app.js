@@ -8,14 +8,18 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
+const DB =
+  'mongodb+srv://kulkarnisarang01:7776021397@cluster0.dj4jshn.mongodb.net/mernbusiness?retryWrites=true&w=majority';
 mongoose.set('strictQuery', false);
-mongoose.connect(
-  'mongodb://0.0.0.0:27017/business',
-  { useNewUrlParser: true, useUnifiedTopology: true },
-  (err) => {
-    console.log(err ? err : 'Connected to database');
-  }
-);
+mongoose
+  .connect(DB, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log('Connected to database');
+  })
+  .catch((err) => console.log('database not connected'));
 
 var app = express();
 
