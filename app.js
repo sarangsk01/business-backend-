@@ -11,15 +11,29 @@ var usersRouter = require('./routes/users');
 const DB = process.env.MONGO_UI;
 
 mongoose.set('strictQuery', false);
-mongoose
-  .connect(DB, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => {
-    console.log('Connected to database');
-  })
-  .catch((err) => console.log('database not connected'));
+// Mongodb
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const uri = DB;
+const client = new MongoClient(uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  serverApi: ServerApiVersion.v1,
+});
+client.connect((err) => {
+  const collection = client.db('test').collection('devices');
+  // perform actions on the collection object
+  client.close();
+});
+
+// mongoose
+//   .connect(DB, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//   })
+//   .then(() => {
+//     console.log('Connected to database');
+//   })
+//   .catch((err) => console.log('database not connected'));
 
 var app = express();
 
