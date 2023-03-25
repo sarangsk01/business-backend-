@@ -1,4 +1,5 @@
 var createError = require('http-errors');
+var dotenv = require('dotenv').config();
 var express = require('express');
 var mongoose = require('mongoose');
 var path = require('path');
@@ -8,33 +9,47 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
-const DB = process.env.MONGO_UI;
+const connectDB = require('./connection/db');
+connectDB();
+// const DB = process.env.MONGO_UI;
 
 mongoose.set('strictQuery', false);
-// Mongodb
-const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = DB;
-const client = new MongoClient(uri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  serverApi: ServerApiVersion.v1,
-});
-MongoClient.connect((err) => {
-  const collection = client.db('test').collection('devices');
-  // perform actions on the collection object
-  client.close();
-});
+// Mongodb full driver code
+// const { MongoClient, ServerApiVersion } = require('mongodb');
+// const uri = DB;
+// const client = new MongoClient(uri, {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+//   serverApi: ServerApiVersion.v1,
+// });
+// client.connect((err) => {
+//   const collection = client.db('test').collection('devices');
+//   // perform actions on the collection object
+//   client.close();
+// });
 
+// Mongodb short code
 // mongoose
-//   .connect(DB, {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//   })
+//   .connect(
+//     'mongodb+srv://',
+//     {
+//       useNewUrlParser: true,
+//       useUnifiedTopology: true,
+//     }
+//   )
 //   .then(() => {
 //     console.log('Connected to database');
 //   })
 //   .catch((err) => console.log('database not connected'));
 
+// mongodb local database code
+// mongoose.connect(
+//   'mongodb://127.0.0.1:27017/business',
+//   { useNewUrlParser: true, useUnifiedTopology: true },
+//   (err) => {
+//     console.log(err ? err : 'Connected to database');
+//   }
+// );
 var app = express();
 
 // view engine setup

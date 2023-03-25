@@ -13,7 +13,7 @@ router.post('/', async (req, res) => {
   User.create(req.body, (err, user) => {
     console.log(err, user);
     if (!this.name || !this.mobile || !this.subject || !this.message) {
-      res.json({ error: 'तुमचा संदेश टाइप करा' });
+      return res.json({ error: 'तुमचा संदेश टाइप करा' });
     } else {
       res.json({ message: 'तुमचा संदेश पाठवण्यात आला आहे.' });
     }
