@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
-const USERNAME = process.env.USERNAME;
-const PASSWORD = process.env.PASSWORD;
-const DATABASE = process.env.DATABASE;
-const DB = `mongodb+srv://${USERNAME}:${PASSWORD}@cluster0.dj4jshn.mongodb.net/${DATABASE}?retryWrites=true&w=majority`;
+const DB =
+  'mongodb+srv://kulkarnisarang01:7776021397@cluster0.dj4jshn.mongodb.net/mernbusiness?retryWrites=true&w=majority';
 const connectDB = async () => {
   await mongoose
     .connect(DB, {
