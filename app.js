@@ -11,7 +11,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 // const connectDB = require('./connection/db');
-connectDB();
+
 const DB = process.env.MONGO_UI;
 mongoose.set('strictQuery', false);
 
@@ -26,6 +26,7 @@ const connectDB = async () => {
     })
     .catch((err) => console.log('database not connected'));
 };
+connectDB();
 
 // Mongodb full driver code
 // const { MongoClient, ServerApiVersion } = require('mongodb');
