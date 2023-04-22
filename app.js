@@ -1,5 +1,6 @@
 var createError = require('http-errors');
-var dotenv = require('dotenv').config({ path: './config.env' });
+var dotenv = require('dotenv');
+dotenv.config({ path: './config.env' });
 var express = require('express');
 var mongoose = require('mongoose');
 var path = require('path');
@@ -11,22 +12,19 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 // const connectDB = require('./connection/db');
-
+// connectDB();
 const DB = process.env.MONGO_UI;
 mongoose.set('strictQuery', false);
 
-const connectDB = async () => {
-  await mongoose
-    .connect(DB, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    })
-    .then(() => {
-      console.log('Connected to database');
-    })
-    .catch((err) => console.log('database not connected'));
-};
-connectDB();
+mongoose
+  .connect(DB, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log('Connected to database');
+  })
+  .catch((err) => console.log('database not connected'));
 
 // Mongodb full driver code
 // const { MongoClient, ServerApiVersion } = require('mongodb');
